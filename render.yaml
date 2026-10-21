@@ -30,3 +30,9 @@ services:
         sync: false
       - key: ANTHROPIC_API_KEY
         sync: false          # optional: turns on the AI guide
+      - key: SITE_URL
+        value: https://stingcode.com
+      - key: RESEND_API_KEY
+        sync: false          # optional: email alerts for new inquiries
+      - key: ALERT_EMAIL_TO
+        sync: false

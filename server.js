@@ -6,6 +6,7 @@ import { dirname, join } from 'node:path';
 import * as store from './src/db.js';
 import { login, logout, sessionFrom, requireAdmin, setSessionCookie, clearSessionCookie, rateLimit, upsertAdmin, adminCount } from './src/auth.js';
 import { answer, chatEnabled } from './src/chat.js';
+import { sendInquiryAlert, alertsEnabled } from './src/notify.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -19,6 +20,7 @@ if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
     console.log(`Admin account ready for ${process.env.ADMIN_EMAIL}`);
   } catch (e) { console.error('Admin not set up: ' + e.message); }
 }
+console.log(alertsEnabled() ? `Inquiry alerts go to ${process.env.ALERT_EMAIL_TO}` : 'Inquiry email alerts are off (set RESEND_API_KEY and ALERT_EMAIL_TO to turn them on).');
 if (adminCount() === 0) console.warn('No admin account yet. Set ADMIN_EMAIL and ADMIN_PASSWORD in .env or run: npm run create-admin');
 
 app.set('trust proxy', process.env.TRUST_PROXY === '1' ? 1 : false);
@@ -54,8 +56,11 @@ app.post('/api/inquiries', rateLimit(5, 10 * 60e3), (req, res) => {
     return res.status(400).json({ error: 'Name, a valid email and a message are required.' });
   }
   const { handled, sample, ...rest } = b; // visitors can't set internal flags
-  store.create('inquiries', { ...rest, handled: false, sample: false, createdAt: undefined });
+  const saved = store.create('inquiries', { ...rest, handled: false, sample: false, createdAt: undefined });
   res.status(201).json({ ok: true });
+  // Email alert after replying, so a slow or failed email never blocks the visitor.
+  const site = process.env.SITE_URL || `${req.protocol}://${req.get('host')}`;
+  sendInquiryAlert(saved, site).catch(e => console.error('Inquiry alert failed:', e.message));
 });
 
 app.post('/api/chat', rateLimit(20, 5 * 60e3), async (req, res) => {

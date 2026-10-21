@@ -46,6 +46,17 @@ npm run create-admin -- dev@stingcode.com "a-long-password-here"
 
 Get an API key at console.anthropic.com, put it in `.env` as `ANTHROPIC_API_KEY=...`, and restart. Without a key, the chat politely points visitors to your email. Visitors are limited to 20 questions per 5 minutes, and answers stay short, so the cost is cents per day at normal traffic.
 
+## Get an email for every new inquiry
+
+1. Sign up free at resend.com **with the email address you want alerts sent to**.
+2. In Resend: API Keys → Create API Key (Sending access) → copy it.
+3. Add to your settings (Render → Environment): `RESEND_API_KEY` = the key, `ALERT_EMAIL_TO` = that same email.
+4. Save and deploy. Each inquiry now arrives in your inbox; hit Reply to answer the customer directly.
+
+Want alerts at a different address, or several (`a@x.com,b@x.com`)? In Resend, add and verify the domain stingcode.com (it gives you a few DNS records to add at GoDaddy), then set `ALERT_EMAIL_FROM` = `StingCode Website <alerts@stingcode.com>`.
+
+If an email ever fails, the inquiry is still saved in the back office, and the error appears in the logs.
+
 ## Put it on stingcode.com
 
 Any host that runs Node works. You need a **persistent disk** for the database file.
