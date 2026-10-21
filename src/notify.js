@@ -33,6 +33,9 @@ export async function sendInquiryAlert(inq, siteUrl) {
       html, text,
     }),
   });
-  if (!r.ok) throw new Error(`Resend ${r.status}: ${(await r.text()).slice(0, 300)}`);
-  return { sent: true };
+  const body = await r.text();
+  if (!r.ok) throw new Error(`Resend ${r.status}: ${body.slice(0, 300)}`);
+  let id = ''; try { id = JSON.parse(body).id || ''; } catch {}
+  console.log(`Inquiry alert sent to ${process.env.ALERT_EMAIL_TO} (Resend id ${id || 'unknown'})`);
+  return { sent: true, id };
 }

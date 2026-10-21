@@ -60,6 +60,7 @@ app.post('/api/inquiries', rateLimit(5, 10 * 60e3), (req, res) => {
   res.status(201).json({ ok: true });
   // Email alert after replying, so a slow or failed email never blocks the visitor.
   const site = process.env.SITE_URL || `${req.protocol}://${req.get('host')}`;
+  console.log(`New inquiry saved (${saved.id})${alertsEnabled() ? ', emailing alert' : ', email alerts are off'}`);
   sendInquiryAlert(saved, site).catch(e => console.error('Inquiry alert failed:', e.message));
 });
 
