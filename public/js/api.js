@@ -45,8 +45,9 @@
     doc(path) {
       const { col, id } = split(path);
       return {
-        // Public visitors submit inquiries through the public endpoint; admins write directly.
-        set: data => (col === 'inquiries' && !isAdminCached ? api('POST', '/api/inquiries', data) : api('PUT', `/api/${col}/${encodeURIComponent(id)}`, data)).then(after(col)),
+        // The contact form always goes through the public endpoint (validation, spam limits,
+        // email alert), even when the person filling it in is signed in to the back office.
+        set: data => (col === 'inquiries' ? api('POST', '/api/inquiries', data) : api('PUT', `/api/${col}/${encodeURIComponent(id)}`, data)).then(after(col)),
         update: data => api('PATCH', `/api/${col}/${encodeURIComponent(id)}`, data).then(after(col)),
         delete: () => api('DELETE', `/api/${col}/${encodeURIComponent(id)}`).then(after(col)),
       };
