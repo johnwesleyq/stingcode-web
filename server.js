@@ -11,10 +11,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
-// First run: create the admin from .env if none exists yet.
-if (adminCount() === 0 && process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
-  upsertAdmin(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
-  console.log(`Created admin account for ${process.env.ADMIN_EMAIL}`);
+// The admin in ADMIN_EMAIL / ADMIN_PASSWORD is created on start, and its password is
+// updated to match on every start, so changing the setting on your host resets it.
+if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+  try {
+    upsertAdmin(process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
+    console.log(`Admin account ready for ${process.env.ADMIN_EMAIL}`);
+  } catch (e) { console.error('Admin not set up: ' + e.message); }
 }
 if (adminCount() === 0) console.warn('No admin account yet. Set ADMIN_EMAIL and ADMIN_PASSWORD in .env or run: npm run create-admin');
 
