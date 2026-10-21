@@ -1,0 +1,32 @@
+# Render Blueprint: Render reads this file and sets up the service for you.
+services:
+  - type: web
+    name: stingcode-web
+    runtime: node
+    plan: starter            # $7/mo; needed for the persistent disk below
+    region: oregon
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/config
+    disk:
+      name: stingcode-data
+      mountPath: /var/data
+      sizeGB: 1
+    domains:
+      - stingcode.com
+      - www.stingcode.com
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATABASE_PATH
+        value: /var/data/stingcode.db
+      - key: ADMIN_EMAIL
+        sync: false          # Render asks you for this during setup
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false          # optional: turns on the AI guide
