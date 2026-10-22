@@ -192,3 +192,20 @@ footer a:hover{color:var(--fg);text-decoration:underline}
 footer .brand{color:var(--fg);font-size:24px;margin-bottom:10px}
 footer .legal{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13.5px}
 @media (max-width:760px){footer .cols{grid-template-columns:1fr 1fr}footer .about{grid-column:1/-1}}
+
+/* Industry pages */
+.pains{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pain{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent-strong);border-radius:14px;padding:22px 24px}
+.pain h3{font-size:26px;font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.pain p{color:var(--muted);font-size:15.5px}
+@media (max-width:860px){.pains{grid-template-columns:1fr}}
+a.build{text-decoration:none;color:inherit}
+.build .go{margin-top:auto;padding-top:6px;color:var(--accent);font-weight:600;font-size:14.5px}
+a.build:hover{border-color:color-mix(in srgb,var(--accent-strong) 60%,var(--line))}
+.starts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.starts a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;font-weight:600;transition:border-color .15s ease}
+.starts a:hover{border-color:var(--accent-strong)}
+.starts b{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--accent);white-space:nowrap}
+.svc .eyebrow{margin-bottom:-4px}
+footer .cols{grid-template-columns:1.3fr 1fr 1fr 1fr}
+@media (max-width:860px){footer .cols{grid-template-columns:1fr 1fr}}
