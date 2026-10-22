@@ -107,5 +107,6 @@ app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
 /* ---------- Website ---------- */
 app.use(express.static(join(__dirname, 'public'), { extensions: ['html'], maxAge: '1h' }));
 app.get('/admin', (req, res) => res.redirect('/#admin'));
+app.use((req, res) => res.status(404).sendFile(join(__dirname, 'public', '404.html')));
 
 app.listen(PORT, () => console.log(`StingCode running at http://localhost:${PORT}`));
