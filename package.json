@@ -4,12 +4,15 @@
   "private": true,
   "description": "StingCode website and back office (leads, clients, projects, inquiries).",
   "type": "module",
-  "engines": { "node": ">=22.13" },
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "start": "node --disable-warning=ExperimentalWarning server.js",
     "dev": "node --watch --disable-warning=ExperimentalWarning server.js",
     "seed": "node --disable-warning=ExperimentalWarning scripts/seed.js",
-    "create-admin": "node --disable-warning=ExperimentalWarning scripts/create-admin.js"
+    "create-admin": "node --disable-warning=ExperimentalWarning scripts/create-admin.js",
+    "build-pages": "node scripts/build-pages.mjs"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
