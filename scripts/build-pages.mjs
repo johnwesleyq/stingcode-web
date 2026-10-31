@@ -63,7 +63,7 @@ const nav = current => `<header class="nav">
     <nav class="nav-links" aria-label="Main">
       <a href="/services/"${current === 'services' ? ' aria-current="page"' : ''}>Services</a><a href="/industries/"${current === 'industries' ? ' aria-current="page"' : ''}>Industries</a><a href="/#route">Process</a><a href="/#pricing">Pricing</a><a href="/#ai">AI</a><a href="/#contact">Contact</a>
     </nav>
-    <div class="nav-cta"><a class="btn btn-gold btn-sm" href="/#contact">Book a free call</a></div>
+    <div class="nav-cta"><a class="btn btn-gold btn-sm" href="/?service=Automation%20or%20integration#contact">Free automation audit</a></div>
   </div>
 </header>`;
 

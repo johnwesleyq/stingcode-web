@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="StingCode builds dashboards, custom software and AI chatbots for Denver and Colorado businesses — fixed prices, local team, you own the code.">
+<meta name="description" content="StingCode automates the reports, data entry and copy-paste work slowing small businesses down. Denver team, fixed prices from $3,000, free automation audit.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<title>StingCode | Custom Software, Dashboards & AI Chatbots in Denver, CO</title>
+<title>StingCode | Business Automation, Dashboards & AI in Denver, CO</title>
 <link rel="canonical" href="https://stingcode.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="StingCode">
-<meta property="og:title" content="StingCode | Custom Software, Dashboards & AI Chatbots in Denver">
+<meta property="og:title" content="StingCode | We automate the busywork in your business">
 <meta property="og:description" content="A local Denver team building dashboards, custom web apps and AI chatbots for growing businesses. Fixed prices, and you own the code.">
 <meta property="og:url" content="https://stingcode.com/">
 <meta property="og:image" content="https://stingcode.com/og-image.jpg">
@@ -127,6 +127,30 @@ button,input,select,textarea{font:inherit;color:inherit}
 @keyframes grow{from{transform:scaleY(.15);transform-origin:bottom}to{transform:scaleY(1);transform-origin:bottom}}
 .hc-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px}
 .hc-chat{margin-top:14px;display:grid;gap:6px;font-size:13px}
+.runlog{display:grid;gap:8px;margin-top:4px}
+.run{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;font-size:14px;padding:9px 12px;background:var(--surface-2);border-radius:12px;animation:runIn .5s ease both}
+.run:nth-child(2){animation-delay:.25s}.run:nth-child(3){animation-delay:.5s}.run:nth-child(4){animation-delay:.75s}.run:nth-child(5){animation-delay:1s}
+.run .ok{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good);font-size:12px;font-weight:700}
+.run time{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+@keyframes runIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hc-saved{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.hc-saved div{background:color-mix(in srgb,var(--accent-strong) 14%,transparent);border-radius:12px;padding:10px 12px}
+.hc-saved small{display:block;font-size:11.5px;color:var(--muted)}
+.hc-saved strong{font-family:var(--display);font-size:24px;font-weight:800;line-height:1.1}
+.calc{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch}
+.calc-in{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,34px);display:grid;gap:26px;align-content:start}
+.sl{display:grid;gap:12px;font-weight:600}
+.sl span{display:flex;justify-content:space-between;gap:12px}
+.sl b{font-family:var(--mono);color:var(--accent)}
+.sl input{width:100%;accent-color:var(--accent-strong);height:28px}
+.calc-note{font-size:13.5px;color:var(--muted);margin:0}
+.calc-out{background:linear-gradient(150deg,var(--m4),var(--m5));color:#f1ede4;border-radius:20px;padding:clamp(24px,3.4vw,40px);display:flex;flex-direction:column;gap:8px;justify-content:center}
+.calc-out small{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#cfd3cf}
+.calc-out strong{font-family:var(--display);font-size:clamp(56px,7vw,88px);font-weight:800;line-height:1;color:var(--accent-strong)}
+.calc-out .per{font-size:17px;color:#e6e2d8}
+.calc-out .payback{margin:14px 0 18px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.08);font-size:16px}
+.calc-out .btn{align-self:flex-start}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
 .hc-chat .q{justify-self:end;background:var(--accent-strong);color:var(--accent-ink);padding:6px 11px;border-radius:12px 12px 2px 12px}
 .hc-chat .a{justify-self:start;background:var(--surface-2);padding:6px 11px;border-radius:12px 12px 12px 2px;max-width:90%}
 
@@ -357,7 +381,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
     </nav>
     <div class="nav-cta">
       <button class="btn btn-ghost btn-sm" id="adminLink" type="button" hidden>Admin</button>
-      <a class="btn btn-gold btn-sm" href="#contact">Book a free call</a>
+      <a class="btn btn-gold btn-sm" href="#contact" data-service="Automation or integration">Free automation audit</a>
     </div>
   </div>
 </header>
@@ -368,29 +392,24 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
   <div class="wrap">
     <div>
       <span class="elev"><b>Elev. 5,280 ft</b> · Denver, Colorado</span>
-      <h1>Software built<span class="gold">at altitude.</span></h1>
-      <p class="lead">StingCode is a local Denver team that builds custom web apps, dashboards, AI chatbots and integrations for growing businesses. Fixed prices, real people you can meet, and your first result in weeks.</p>
+      <h1>We automate<span class="gold">the busywork.</span></h1>
+      <p class="lead">StingCode is a Denver team that automates the reports, data entry and copy-paste work slowing your business down, then adds dashboards and AI assistants where they help. Fixed prices from $3,000, and your first automation running in weeks.</p>
       <div class="ctas">
-        <a class="btn btn-gold" href="#contact">Book a free intro call
+        <a class="btn btn-gold" href="#contact" data-service="Automation or integration">Get a free automation audit
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="#services">See what we build</a>
+        <a class="btn btn-ghost" href="#calculator">What is busywork costing you?</a>
       </div>
     </div>
-    <div class="hero-card" aria-label="Example of a dashboard StingCode builds">
-      <div class="hc-top"><span class="hc-title">Job costing · Q3</span><span class="tag">Example build</span></div>
-      <div class="hc-kpis">
-        <div><small>Revenue</small><strong>$1.42M</strong><div class="up">▲ 12%</div></div>
-        <div><small>Margin</small><strong>23.8%</strong><div class="up">▲ 3.1 pts</div></div>
-        <div><small>Open jobs</small><strong>37</strong><div class="up">6 ahead</div></div>
+    <div class="hero-card" aria-label="Example of an automation StingCode builds">
+      <div class="hc-top"><span class="hc-title">Monday owner report</span><span class="tag">Example automation</span></div>
+      <div class="runlog">
+        <div class="run"><span class="ok" aria-hidden="true">✓</span><span>Pulled last week's invoices from QuickBooks</span><time>6:00 am</time></div>
+        <div class="run"><span class="ok" aria-hidden="true">✓</span><span>Matched jobs from the scheduling app</span><time>6:01 am</time></div>
+        <div class="run"><span class="ok" aria-hidden="true">✓</span><span>Flagged 3 jobs running over budget</span><time>6:01 am</time></div>
+        <div class="run"><span class="ok" aria-hidden="true">✓</span><span>Updated the margin dashboard</span><time>6:02 am</time></div>
+        <div class="run"><span class="ok" aria-hidden="true">✓</span><span>Emailed the report to the owner</span><time>6:02 am</time></div>
       </div>
-      <div class="hc-bars">
-        <span style="height:46%"></span><span style="height:62%;animation-delay:.05s"></span><span style="height:54%;animation-delay:.1s"></span><span style="height:71%;animation-delay:.15s"></span><span style="height:66%;animation-delay:.2s"></span><span style="height:83%;animation-delay:.25s"></span><span style="height:78%;animation-delay:.3s"></span><span style="height:94%;animation-delay:.35s"></span>
-      </div>
-      <div class="hc-axis"><span>Jul</span><span>Aug</span><span>Sep</span></div>
-      <div class="hc-chat">
-        <div class="q">Which jobs are over budget?</div>
-        <div class="a">3 jobs: Lakewood remodel (+8%), Arvada retail (+5%), Golden office (+2%).</div>
-      </div>
+      <div class="hc-saved"><div><small>Used to take</small><strong>4 hrs</strong></div><div><small>Now takes</small><strong>2 min</strong></div><div><small>Runs</small><strong>Every week</strong></div></div>
     </div>
   </div>
 </section>
@@ -403,6 +422,30 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
     <div><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>First result in weeks</div>
   </div>
 </div>
+
+<section class="block calc-sec" id="calculator">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Quick math · Busywork</div><h2>What is busywork costing you?</h2></div>
+      <p>Count the hours your team spends copying data, building reports and chasing the same answers. Move the sliders to see what it adds up to in a year.</p>
+    </div>
+    <div class="calc">
+      <div class="calc-in">
+        <label class="sl"><span>People doing repetitive tasks <b id="cPeopleV">3</b></span><input type="range" id="cPeople" min="1" max="25" value="3"></label>
+        <label class="sl"><span>Hours each, per week <b id="cHoursV">5</b></span><input type="range" id="cHours" min="1" max="20" value="5"></label>
+        <label class="sl"><span>Cost per hour, with benefits <b id="cRateV">$35</b></span><input type="range" id="cRate" min="18" max="120" step="1" value="35"></label>
+        <p class="calc-note">Based on 50 working weeks a year. Payback assumes automation removes half of these hours and a typical project costs about $8,500.</p>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <small>Busywork costs you about</small>
+        <strong id="cCost">$26,250</strong>
+        <span class="per">a year · <b id="cHrs">750</b> hours</span>
+        <div class="payback">Automating half of it pays back in about <b id="cPay">8 months</b>.</div>
+        <a class="btn btn-gold" href="#contact" data-service="Automation or integration">Get a free automation audit →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="block" id="services">
   <div class="wrap">
@@ -550,8 +593,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
 <section class="block" id="contact" style="padding-top:0">
   <div class="wrap contact">
     <div class="contact-side">
-      <div><div class="eyebrow">Basecamp · Contact</div><h2 style="font-size:clamp(40px,5.4vw,72px);font-weight:800;text-transform:uppercase;margin-top:10px">Start your route</h2></div>
-      <p style="color:var(--muted);font-size:17px">Tell us what's slowing your team down. We'll reply within one business day to set up a free 30-minute call.</p>
+      <div><div class="eyebrow">Basecamp · Contact</div><h2 style="font-size:clamp(40px,5.4vw,72px);font-weight:800;text-transform:uppercase;margin-top:10px">Free automation audit</h2></div>
+      <p style="color:var(--muted);font-size:17px">Tell us which tasks eat your team's week. On a free 30-minute call we'll map them with you and point out 3 things you could automate, with a rough price for each. No obligation.</p>
       <div class="card"><b>Email</b><div class="copyline"><span id="emailText">hello@stingcode.com</span><button class="chip" type="button" id="copyEmail">Copy</button></div></div>
       <div class="card"><b>Based in Denver</b><span>Serving the Front Range: Denver, Boulder, Aurora, Golden, Colorado Springs and remote.</span></div>
     </div>
@@ -561,7 +604,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;
       <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="jordan@company.com"></div>
       <div class="field"><label for="f-phone">Phone (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(303) 555-0142"></div>
       <div class="field"><label for="f-service">What do you need?</label>
-        <select id="f-service" name="service"><option>Dashboard or report</option><option>AI chatbot or assistant</option><option>Custom web app or portal</option><option>Automation or integration</option><option>Mobile app</option><option>Not sure yet</option></select></div>
+        <select id="f-service" name="service"><option>Dashboard or report</option><option>AI chatbot or assistant</option><option>Custom web app or portal</option><option selected>Automation or integration</option><option>Mobile app</option><option>Not sure yet</option></select></div>
       <div class="field"><label for="f-budget">Budget</label>
         <select id="f-budget" name="budget"><option>Under $5k</option><option selected>$5k – $15k</option><option>$15k – $50k</option><option>$50k+</option><option>Not sure</option></select></div>
       <div class="field full"><label for="f-timeline">Timeline</label>
@@ -687,6 +730,28 @@ const capsReady = (async () => {
   if (isAdmin) { $('#adminLink').hidden = false; }
   if (location.hash === '#admin') route();
 })();
+
+/* ---------------- Busywork calculator ---------------- */
+(() => {
+  const el = id => document.getElementById(id);
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+  const calc = () => {
+    const people = +el('cPeople').value, hours = +el('cHours').value, rate = +el('cRate').value;
+    el('cPeopleV').textContent = people; el('cHoursV').textContent = hours; el('cRateV').textContent = '$' + rate;
+    const yearHours = people * hours * 50, cost = yearHours * rate;
+    el('cHrs').textContent = yearHours.toLocaleString('en-US'); el('cCost').textContent = fmt(cost);
+    const months = 8500 / (cost * 0.5 / 12);
+    el('cPay').textContent = months <= 1 ? 'under a month' : months > 36 ? 'over 3 years, so start with a smaller fix' : `${Math.round(months)} months`;
+  };
+  ['cPeople', 'cHours', 'cRate'].forEach(id => el(id) && el(id).addEventListener('input', calc));
+  if (el('cPeople')) calc();
+})();
+// Buttons that open the contact form with a service pre-selected
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-service]'); if (!a) return;
+  const sel = document.getElementById('f-service');
+  const opt = sel && [...sel.options].find(o => o.text === a.dataset.service); if (opt) sel.value = opt.value;
+});
 
 /* ---------------- Inquiry form ---------------- */
 // Pre-select the service when arriving from a service page (/?service=...#contact)
